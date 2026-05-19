@@ -1,0 +1,20 @@
+{
+  "name": "secure-2fa-system",
+  "version": "1.0.0",
+  "description": "Secure Two-Factor Authentication (2FA) System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test_flow.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^8.0.7",
+    "otplib": "^12.0.1",
+    "qrcode": "^1.5.3",
+    "sqlite3": "^5.1.7",
+    "uuid": "^9.0.1"
+  }
+}
