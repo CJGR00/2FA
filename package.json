@@ -1,7 +1,7 @@
 {
-  "name": "secure-2fa-system",
+  "name": "trustfactor",
   "version": "1.0.0",
-  "description": "Secure Two-Factor Authentication (2FA) System",
+  "description": "TrustFactor authentication platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.1.0",
+    "joi": "^18.2.1",
     "nodemailer": "^8.0.7",
     "otplib": "^12.0.1",
     "qrcode": "^1.5.3",

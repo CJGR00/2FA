@@ -37,7 +37,7 @@ const dbQuery = {
 
 // Initialize DB schema
 async function initDatabase() {
-  console.log('Initializing SQLite database schema...');
+  console.log('Initializing TrustFactor database schema...');
   
   // Enable foreign keys
   await dbQuery.run('PRAGMA foreign_keys = ON;');
@@ -71,7 +71,7 @@ async function initDatabase() {
     CREATE TABLE IF NOT EXISTS two_fa_codes (
       code_id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL,
-      code_hash TEXT NOT NULL, -- SHA-256 hash of the SMS/Email code
+      code_hash TEXT NOT NULL, -- SHA-256 hash of the email/app verification code
       expiration_time INTEGER NOT NULL, -- Timestamp in ms
       is_used INTEGER DEFAULT 0, -- 0 = false, 1 = true
       attempt_count INTEGER DEFAULT 0, -- Counter for rate limiting code verification attempts

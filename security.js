@@ -4,6 +4,10 @@ const bcrypt = require('bcrypt');
 // Retrieve key from environment or generate a temporary in-memory key for the session
 let encryptionKey = process.env.ENCRYPTION_KEY;
 if (!encryptionKey) {
+  if (process.env.NODE_ENV === 'production') {
+    console.error('CRITICAL: ENCRYPTION_KEY is not set in production. Shutting down to prevent TOTP data loss on restart.');
+    process.exit(1);
+  }
   console.warn('WARNING: ENCRYPTION_KEY not set in environment. Generating a temporary in-memory key for this session.');
   encryptionKey = crypto.randomBytes(32);
 } else {
@@ -88,17 +92,6 @@ function generateSessionToken() {
 }
 
 /**
- * Generate a secure numeric verification code (for SMS).
- * Length can be 6-8 digits (default 6).
- */
-function generateSMSCode(length = 6) {
-  if (length < 6 || length > 8) length = 6;
-  const min = Math.pow(10, length - 1);
-  const max = Math.pow(10, length) - 1;
-  return crypto.randomInt(min, max).toString();
-}
-
-/**
  * Generate a secure alphanumeric verification code (for Email).
  */
 function generateEmailCode(length = 8) {
@@ -138,7 +131,6 @@ module.exports = {
   comparePassword,
   hashSHA256,
   generateSessionToken,
-  generateSMSCode,
   generateEmailCode,
   generateBackupCodes
 };

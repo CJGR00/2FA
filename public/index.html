@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SecurAuth - Secure Two-Factor Authentication Console</title>
-  <!-- Google Fonts: Inter & Outfit -->
+  <title>TrustFactor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
-  <!-- Background decorative glowing orbs -->
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
   <div class="glow-orb orb-3"></div>
 
   <div class="app-container">
-
-    <!-- Top Navigation -->
     <header class="app-header">
       <div class="logo">
-        <span class="logo-shield">🛡️</span>
-        <span class="logo-text">Secur<span>Auth</span></span>
+        <span class="logo-shield">TF</span>
+        <span class="logo-text">Trust<span>Factor</span></span>
       </div>
       <nav class="nav-links">
-        <button id="nav-btn-home" class="nav-link-btn hidden">Console</button>
-        <button id="nav-btn-admin" class="nav-link-btn hidden">Admin Monitor</button>
-        <button id="nav-btn-logout" class="nav-link-btn auth-only hidden">Sign Out</button>
+        <label class="theme-switch" for="theme-toggle">
+          <input type="checkbox" id="theme-toggle">
+          <span class="theme-switch-track">
+            <span class="theme-switch-icon theme-switch-sun">☀</span>
+            <span class="theme-switch-thumb"></span>
+            <span class="theme-switch-icon theme-switch-moon">☾</span>
+          </span>
+        </label>
+        <button id="nav-btn-admin" class="nav-link-btn hidden">Admin</button>
+        <button id="nav-btn-logout" class="nav-link-btn hidden">Sign Out</button>
       </nav>
     </header>
 
-    <!-- Main Content Area -->
     <main class="main-content">
-
-      <!-- ========================================== -->
-      <!-- VIEW 1: REGISTRATION -->
-      <!-- ========================================== -->
       <section id="view-register" class="auth-card hidden">
         <div class="card-header">
           <h2>Create Account</h2>
-          <p>Register to start testing our secure 2FA authentication flow.</p>
+          <p>Create a secure TrustFactor account with a cleaner login and verification experience.</p>
         </div>
 
         <div id="register-error" class="alert alert-danger hidden"></div>
@@ -54,20 +47,15 @@
         <form id="register-form" class="auth-form">
           <div class="form-group">
             <label for="reg-username">Username</label>
-            <input type="text" id="reg-username" required placeholder="enter username" autocomplete="username">
+            <input type="text" id="reg-username" required placeholder="Choose a username" autocomplete="username">
           </div>
           <div class="form-group">
             <label for="reg-email">Email Address</label>
-            <input type="email" id="reg-email" required placeholder="you@domain.com" autocomplete="email">
-          </div>
-          <div class="form-group">
-            <label for="reg-phone">Phone Number (SMS 2FA)</label>
-            <input type="tel" id="reg-phone" placeholder="+1234567890" autocomplete="tel">
-            <span class="input-hint">Include country code (e.g., +15550100)</span>
+            <input type="email" id="reg-email" required placeholder="you@company.com" autocomplete="email">
           </div>
           <div class="form-group">
             <label for="reg-password">Password</label>
-            <input type="password" id="reg-password" required placeholder="••••••••" autocomplete="new-password">
+            <input type="password" id="reg-password" required placeholder="Enter a strong password" autocomplete="new-password">
           </div>
 
           <button type="submit" id="reg-submit-btn" class="btn btn-primary">
@@ -81,13 +69,10 @@
         </div>
       </section>
 
-      <!-- ========================================== -->
-      <!-- VIEW 2: LOGIN -->
-      <!-- ========================================== -->
       <section id="view-login" class="auth-card">
         <div class="card-header">
-          <h2>Security Portal</h2>
-          <p>Enter your credentials to access the console.</p>
+          <h2>Welcome to TrustFactor</h2>
+          <p>Sign in to manage your account and verification settings.</p>
         </div>
 
         <div id="login-error" class="alert alert-danger hidden"></div>
@@ -99,7 +84,7 @@
           </div>
           <div class="form-group">
             <label for="login-password">Password</label>
-            <input type="password" id="login-password" required placeholder="••••••••" autocomplete="current-password">
+            <input type="password" id="login-password" required placeholder="Enter your password" autocomplete="current-password">
           </div>
 
           <div class="form-options">
@@ -111,7 +96,7 @@
           </div>
 
           <button type="submit" id="login-submit-btn" class="btn btn-primary">
-            <span class="btn-text">Proceed to Login</span>
+            <span class="btn-text">Sign In</span>
             <div class="spinner hidden"></div>
           </button>
         </form>
@@ -121,36 +106,31 @@
         </div>
       </section>
 
-      <!-- ========================================== -->
-      <!-- VIEW 3: 2FA CODE VERIFICATION -->
-      <!-- ========================================== -->
       <section id="view-2fa-verify" class="auth-card hidden">
         <div class="card-header">
-          <div class="shield-badge">🔒</div>
+          <div class="shield-badge">TF</div>
           <h2>Two-Factor Verification</h2>
-          <p id="2fa-prompt-text">We sent a code to your device. Please verify your identity.</p>
+          <p id="2fa-prompt-text">Enter your verification code to continue securely.</p>
         </div>
 
         <div id="verify-error" class="alert alert-danger hidden"></div>
         <div id="verify-success" class="alert alert-success hidden"></div>
 
         <form id="verify-form" class="auth-form">
-          <!-- Multi-digit or Single input depending on style -->
           <div class="form-group code-group">
             <label for="verification-code">Verification Code</label>
-            <input type="text" id="verification-code" required placeholder="Enter code" maxlength="9"
-              autocomplete="one-time-code" autofocus>
+            <input type="text" id="verification-code" required placeholder="Enter code" maxlength="9" autocomplete="one-time-code" autofocus>
             <div class="timer-display" id="code-timer">Code expires in <span id="timer-sec">05:00</span></div>
           </div>
 
           <button type="submit" id="verify-submit-btn" class="btn btn-primary">
-            <span class="btn-text">Verify & Sign In</span>
+            <span class="btn-text">Verify and Continue</span>
             <div class="spinner hidden"></div>
           </button>
         </form>
 
         <div class="resend-section">
-          <p>Didn't receive the code?</p>
+          <p>Need a fresh code?</p>
           <button id="btn-resend-code" class="btn btn-secondary btn-sm" disabled>
             Resend Code (<span id="cooldown-sec">30</span>s)
           </button>
@@ -163,16 +143,11 @@
         </div>
       </section>
 
-      <!-- ========================================== -->
-      <!-- VIEW 4: USER DASHBOARD -->
-      <!-- ========================================== -->
       <section id="view-dashboard" class="dashboard-card hidden">
         <div class="dashboard-grid">
-
-          <!-- Column 1: Profile & 2FA Status -->
           <div class="panel profile-panel">
             <div class="profile-header">
-              <div class="avatar">👤</div>
+              <div class="avatar">TF</div>
               <div>
                 <h3 id="dash-username">Username</h3>
                 <p id="dash-email">user@domain.com</p>
@@ -186,8 +161,7 @@
                 <span class="status-dot" id="dash-2fa-dot"></span>
                 <span class="status-label">2FA: <strong id="dash-2fa-status">Disabled</strong></span>
               </div>
-              <p class="status-description" id="dash-2fa-desc">Enable 2FA to secure your account against unauthorized
-                sign-ins.</p>
+              <p class="status-description" id="dash-2fa-desc">Enable 2FA to secure your account against unauthorized sign-ins.</p>
             </div>
 
             <div class="action-buttons">
@@ -196,17 +170,14 @@
             </div>
           </div>
 
-          <!-- Column 2: 2FA Setup Wizard -->
           <div class="panel wizard-panel" id="panel-wizard-placeholder">
             <div class="wizard-placeholder-content">
-              <div class="wizard-shield">🛡️</div>
-              <h4>Two-Factor Authentication Setup</h4>
-              <p>Choose a verification method to shield your account. Select between SMS messaging, Email verification,
-                or standard Authenticator Apps (like Google or Microsoft Authenticator).</p>
+              <div class="wizard-shield">TF</div>
+              <h4>Protect your sign-ins</h4>
+              <p>Set up a second verification step with either an authenticator app or email delivery.</p>
             </div>
           </div>
 
-          <!-- Active Setup Wizard Panel -->
           <div class="panel wizard-panel hidden" id="panel-wizard-active">
             <div class="wizard-header">
               <h4>Setup Wizard</h4>
@@ -223,14 +194,19 @@
 
             <div id="wizard-error" class="alert alert-danger hidden"></div>
 
-            <!-- Step 1: Select Method -->
             <div id="wizard-step-1" class="wizard-step-content">
               <h5>Choose verification method:</h5>
               <div class="method-selector">
                 <label class="method-option">
                   <input type="radio" name="setup-method" value="App" checked>
                   <div class="method-details">
-                    <span class="method-icon">📱</span>
+                    <span class="method-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" role="img">
+                        <rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect>
+                        <path d="M10 6.5h4"></path>
+                        <circle cx="12" cy="17.5" r="1"></circle>
+                      </svg>
+                    </span>
                     <div class="method-text">
                       <h6>Authenticator App</h6>
                       <p>Generate codes via Google Authenticator, Authy, or Microsoft Authenticator.</p>
@@ -239,20 +215,14 @@
                 </label>
 
                 <label class="method-option">
-                  <input type="radio" name="setup-method" value="SMS">
-                  <div class="method-details">
-                    <span class="method-icon">💬</span>
-                    <div class="method-text">
-                      <h6>SMS Code Delivery</h6>
-                      <p>Receive short digit codes on your registered mobile number.</p>
-                    </div>
-                  </div>
-                </label>
-
-                <label class="method-option">
                   <input type="radio" name="setup-method" value="Email">
                   <div class="method-details">
-                    <span class="method-icon">✉️</span>
+                    <span class="method-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" role="img">
+                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                        <path d="M4 7l8 6 8-6"></path>
+                      </svg>
+                    </span>
                     <div class="method-text">
                       <h6>Email Code Delivery</h6>
                       <p>Receive verification codes directly in your registered inbox.</p>
@@ -261,31 +231,20 @@
                 </label>
               </div>
 
-              <!-- SMS specific field -->
-              <div id="sms-phone-setup-group" class="form-group hidden margin-top">
-                <label for="setup-phone-input">Confirm Phone Number</label>
-                <input type="tel" id="setup-phone-input" placeholder="+15550100">
-                <span class="input-hint">Required for receiving SMS codes</span>
-              </div>
-
               <button id="btn-wizard-next-1" class="btn btn-primary btn-block margin-top">Continue</button>
             </div>
 
-            <!-- Step 2: Verification Action (Scan QR/Receive Code) -->
             <div id="wizard-step-2" class="wizard-step-content hidden">
-              <!-- Content for Authenticator App -->
               <div id="setup-content-app" class="setup-method-action hidden">
-                <p>Scan this QR code using your authenticator app:</p>
+                <p>Scan this QR code with your authenticator app.</p>
                 <div class="qr-container">
-                  <img id="setup-qr-image" src="" alt="Google Authenticator QR Code">
+                  <img id="setup-qr-image" src="" alt="Authenticator setup QR code">
                 </div>
-                <p class="manual-entry-key">Or enter key manually: <code id="setup-key-text">SECRETKEY</code></p>
+                <p class="manual-entry-key">Or enter this key manually: <code id="setup-key-text">SECRETKEY</code></p>
               </div>
 
-              <!-- Content for SMS/Email -->
               <div id="setup-content-otp" class="setup-method-action hidden">
-                <p id="setup-otp-prompt">We sent a verification code to your destination. Enter it below to link your
-                  device.</p>
+                <p id="setup-otp-prompt">We sent a verification code to your inbox. Enter it below to enable Email 2FA.</p>
               </div>
 
               <div class="form-group margin-top">
@@ -299,18 +258,14 @@
               </div>
             </div>
 
-            <!-- Step 3: Backup Codes Display -->
             <div id="wizard-step-3" class="wizard-step-content hidden">
               <div class="success-banner">
-                <span class="banner-icon">🎉</span>
-                <h5>2FA Setup Complete!</h5>
-                <p>Save these Backup Recovery Codes. Each code can only be used once if you lose access to your primary
-                  authentication channel.</p>
+                <span class="banner-icon">SAFE</span>
+                <h5>2FA Setup Complete</h5>
+                <p>Save these Backup Recovery Codes. Each code can only be used once if you lose access to your primary authentication channel.</p>
               </div>
 
-              <div class="backup-codes-grid" id="backup-codes-list">
-                <!-- Rendered dynamically -->
-              </div>
+              <div class="backup-codes-grid" id="backup-codes-list"></div>
 
               <div class="backup-actions">
                 <button id="btn-copy-backup" class="btn btn-secondary btn-sm">Copy Codes</button>
@@ -319,24 +274,19 @@
 
               <button id="btn-wizard-finish" class="btn btn-primary btn-block margin-top">Done</button>
             </div>
-
           </div>
-
         </div>
       </section>
 
-      <!-- ========================================== -->
-      <!-- VIEW 5: ADMIN MONITORING PANEL -->
-      <!-- ========================================== -->
       <section id="view-admin" class="admin-card hidden">
         <div class="admin-header">
-          <h2>System Operations Monitoring Console</h2>
-          <p>Real-time server metrics, database tables, user session logs, and security lockouts.</p>
+          <h2>TrustFactor Administration</h2>
+          <p>Monitor account activity, active sessions, verification health, and account management.</p>
         </div>
 
         <div class="metrics-grid">
           <div class="metric-card">
-            <span class="metric-icon">👥</span>
+            <span class="metric-icon">US</span>
             <div class="metric-info">
               <span class="metric-num" id="metric-users">0</span>
               <span class="metric-title">Registered Users</span>
@@ -344,25 +294,23 @@
           </div>
 
           <div class="metric-card">
-            <span class="metric-icon">🔑</span>
+            <span class="metric-icon">2F</span>
             <div class="metric-info">
               <span class="metric-num" id="metric-2fa">0</span>
-              <span class="metric-title">2FA Shielded Accounts</span>
+              <span class="metric-title">2FA Enabled</span>
             </div>
           </div>
 
           <div class="metric-card">
-            <span class="metric-icon">💻</span>
+            <span class="metric-icon">SS</span>
             <div class="metric-info">
               <span class="metric-num" id="metric-sessions">0</span>
-              <span class="metric-title">Active Secure Sessions</span>
+              <span class="metric-title">Active Sessions</span>
             </div>
           </div>
         </div>
 
         <div class="admin-tables-grid">
-
-          <!-- Table 1: Active Lockouts -->
           <div class="admin-table-container">
             <h4>Active Account Lockouts</h4>
             <div class="table-scroll">
@@ -375,7 +323,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- Rendered dynamically -->
                   <tr class="empty-row">
                     <td colspan="3">No accounts locked out.</td>
                   </tr>
@@ -384,7 +331,6 @@
             </div>
           </div>
 
-          <!-- Table 2: 2FA Audit Trail -->
           <div class="admin-table-container">
             <h4>2FA Verification Activity</h4>
             <div class="table-scroll">
@@ -393,13 +339,12 @@
                   <tr>
                     <th>Username</th>
                     <th>Code Expiry</th>
-                    <th>Used</th>
+                    <th>Status</th>
                     <th>Attempts</th>
                     <th>Timestamp</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- Rendered dynamically -->
                   <tr class="empty-row">
                     <td colspan="5">No active codes.</td>
                   </tr>
@@ -407,12 +352,10 @@
               </table>
             </div>
           </div>
-
         </div>
 
-        <!-- Table 3: Active Sessions -->
         <div class="admin-table-container full-width margin-top">
-          <h4>Active Server Sessions</h4>
+          <h4>Active Sessions</h4>
           <div class="table-scroll">
             <table id="table-sessions">
               <thead>
@@ -420,13 +363,12 @@
                   <th>Session ID</th>
                   <th>Username</th>
                   <th>IP Address</th>
-                  <th>User Agent / Device Info</th>
-                  <th>Created At</th>
-                  <th>Expires At</th>
+                  <th>Device Info</th>
+                  <th>Created</th>
+                  <th>Expires</th>
                 </tr>
               </thead>
               <tbody>
-                <!-- Rendered dynamically -->
                 <tr class="empty-row">
                   <td colspan="6">No active sessions.</td>
                 </tr>
@@ -435,10 +377,9 @@
           </div>
         </div>
 
-        <!-- NEW Table 4: User Management -->
         <div class="admin-table-container full-width margin-top">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <h4>User Management</h4>
+          <div class="admin-toolbar">
+            <h4>Manage Accounts</h4>
             <button id="btn-create-user-modal" class="btn btn-primary btn-sm">Create New User</button>
           </div>
           <div class="table-scroll">
@@ -450,12 +391,11 @@
                   <th>Role</th>
                   <th>2FA</th>
                   <th>Lockout</th>
-                  <th>Created At</th>
+                  <th>Created</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <!-- Rendered dynamically -->
                 <tr class="empty-row">
                   <td colspan="7">Loading users...</td>
                 </tr>
@@ -464,7 +404,6 @@
           </div>
         </div>
 
-        <!-- User Management Form (hidden by default) -->
         <div id="user-management-modal" class="admin-table-container full-width margin-top hidden">
           <h4 id="user-modal-title">Create User</h4>
           <div id="user-modal-error" class="alert alert-danger hidden"></div>
@@ -473,7 +412,7 @@
           <form id="user-management-form" class="auth-form" style="max-width: 100%; margin-top: 1rem;">
             <input type="hidden" id="manage-user-id">
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="management-grid">
               <div class="form-group">
                 <label for="manage-username">Username</label>
                 <input type="text" id="manage-username" required>
@@ -484,15 +423,14 @@
               </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: end;">
+            <div class="management-grid-wide">
               <div class="form-group" id="manage-password-group">
                 <label for="manage-password">Password (Required for new)</label>
                 <input type="password" id="manage-password">
               </div>
               <div class="form-group">
                 <label for="manage-role">Role</label>
-                <select id="manage-role"
-                  style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); color: #fff;">
+                <select id="manage-role">
                   <option value="user">User</option>
                   <option value="admin">Admin</option>
                 </select>
@@ -503,7 +441,7 @@
               <label class="checkbox-container">
                 <input type="checkbox" id="manage-2fa">
                 <span class="checkmark"></span>
-                2FA Enabled (uncheck to disable)
+                2FA Enabled
               </label>
               <label class="checkbox-container">
                 <input type="checkbox" id="manage-lockout">
@@ -519,30 +457,9 @@
           </form>
         </div>
       </section>
-
     </main>
-
-    <!-- Floating Developer Sandbox Panel (Notification logs helper for SMS/Email) -->
-    <aside class="sandbox-panel">
-      <div class="sandbox-header">
-        <span class="sandbox-dot">🟢</span>
-        <h5>Developer Sandbox Logs</h5>
-        <button id="btn-clear-sandbox" title="Clear logs">🗑️</button>
-      </div>
-      <div class="sandbox-content" id="sandbox-logs-container">
-        <div class="empty-sandbox">
-          <p>No messages sent yet. Trigger a verification email/SMS to see the verification code appear here in
-            real-time.</p>
-        </div>
-      </div>
-      <div class="sandbox-footer">
-        <span class="sandbox-badge">SANDBOX TESTING MODE</span>
-      </div>
-    </aside>
-
   </div>
 
   <script src="js/app.js"></script>
 </body>
-
 </html>
